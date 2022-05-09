@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ccc1a1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .homepage{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f3dfcc;
+            width: 500px;height: 300px;
+            box-shadow: 0px 3px 2px 3px rgba(159, 148, 139, 0.5);
+        }
+
+        .boxes {
+            width: 500px;
+            height: 500px;
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translate(-50%, 0);
+
+            padding: 10px;
+            background-color: white;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            font-size: 30px;
+            line-height: 500px;
+            text-align: center;
+            color: #552626;
+            font-weight: bolder;
+        }
+
+        .box {
+            width: 50%;
+            height: 50%;
+            background-color: green;
+            border: 5px white solid;
+            border-radius: 20px;
+        }
+
+        .answer-box {
+            opacity: 0.8;
+        }
+
+        .title {
+            width: 100%;
+            height: 250px;
+            background-color: antiquewhite;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .start {
+            width: 280px;
+            height: 40px;
+            background-color: #ebcaca;
+            font-size: 23px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            text-align: center;
+            line-height: 40px;
+            color: #ac3030;
+            font-weight: bolder;
+        }
+
+        h1 {
+            color: #000000;
+            font-size: 40px;
+            margin-bottom: 10px;
+            margin-top: 0px;
+        }
+
+        .time-area {
+            width: 150px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 25px;
+            font-weight: bolder;
+            color: #554a26;
+        }
+
+        .score-area {
+            width: 150px;
+            position: absolute;
+            top: 50px;
+            left: 10px;
+            font-size: 25px;
+            font-weight: bolder;
+            color: #554a26;
+        }
+
+
+
+        .start-btn,.start-btn1 {
+            height: 50px;
+            width: 120px;
+            margin-top: 25px;
+            font-size: 22px;
+            line-height: 40px;
+            border-radius: 25px;
+            background-color: rgb(255, 187, 0);
+            border: 3px solid rgb(14, 14, 14);
+            font-weight: bolder;
+            color: rgb(22, 22, 22);
+            box-shadow: 0px 1px 1px 2px rgb(85, 85, 85, .5);
+        }
+
+        .greyBtn {
+            height: 50px;
+            width: 90px;
+            margin-top: 25px;
+            font-size: 22px;
+            line-height: 40px;
+            border-radius: 25px;
+            background-color: rgb(58, 58, 58);
+            border: 3px solid rgb(14, 14, 14);
+            font-weight: bolder;
+            color: rgb(202, 202, 202);
+            box-shadow: 0px 1px 1px 2px rgb(85, 85, 85, .5);
+        }
+        .greyBtn:hover {
+            background-color: #ac3030;
+            border: 3px solid rgb(0, 0, 0);
+            font-weight: bold;
+            color: rgb(238, 224, 203);
+        }
+
+
+        .start-btn,.start-btn1:hover {
+            background-color: #ac3030;
+            border: 3px solid rgb(0, 0, 0);
+            font-weight: bold;
+            color: rgb(238, 224, 203);
+        }
+
+        .start span span {
+            color: #854f4f;
+        }
+
+        .btnList {
+            width: 350px;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .none {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="homepage">
+        <h1>顏色辨識大挑戰</h1>
+        <button class="start-btn">START</button>
+        <button class="continue-btn greyBtn none">繼續</button>
+
+    </section>
+
+
+    <section class="play_game none">
+        <div class="title">
+            <h1>顏色辨識大挑戰</h1>
+            <div class="start"><span><b>找出<span>"顏色不同"</span>的色塊吧!</b></span></div>
+            <span class="time-area">
+                時間: <span class="time"></span>
+            </span>
+            <span class="score-area">
+                分數: <span class="score"></span>
+            </span>
+            <div class="btnList"><button class="start-btn1">重新開始</button>
+                <button class="pause-btn greyBtn">暫停</button>
+                
+            </div>
+
+        </div>
+
+        <div class="boxes">
+        </div>
+    </section>
+
+    <script>
+        
+        const boxAll = document.querySelector('.boxes');
+        boxAll.innerHTML = '';
+        let count = 1;
+        let level = 2;
+
+        game();
+
+        let score = 0;
+        let scoreS = document.querySelector('.score');
+        scoreS.innerHTML = 0 + ' 分';
+
+        function game() {
+
+            boxAll.innerHTML = '';
+            let size = 100 / level;
+            let color = `rgb(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
+
+            let answer = Math.floor(Math.random() * (level ** 2));
+
+
+            for (let i = 0; i < level ** 2; i++) {
+
+                if (i != answer) {
+                    boxAll.innerHTML += `<div class="box" style= "width:${size}%;height:${size}%;background-color:${color};"></div>`;
+                } else {
+                    boxAll.innerHTML += `<div class="box answer-box" style= "width:${size}%;height:${size}%;background-color:${color};"></div>`;
+                }
+            }
+
+            let answerBox = document.querySelector('.answer-box');
+            answerBox.addEventListener('click', function () {
+                // alert("我是答案！");
+                score++;
+                scoreS.innerHTML = score + ' 分';
+
+                count++; //按對了答案加一
+
+                if (count == level) {
+                    level++;
+                    count = 0;
+                }
+                game();
+            })
+
+        };
+
+
+        let time = 30;
+        const yourtime = 30;
+        let timeS = document.querySelector('.time');
+        let timeID;
+        timeS.innerHTML = 30 + ' 秒';
+        
+        let homepage = document.querySelector('.homepage');
+        let play_game = document.querySelector('.play_game');
+        let start_btn = document.querySelector('.start-btn');
+        let continue_btn = document.querySelector('.continue-btn');
+        let start_btn1 = document.querySelector('.start-btn1')
+        let pause_btn =document.querySelector('.pause-btn')
+
+        
+
+        start_btn.addEventListener('click', function () {
+            time = yourtime;
+            score = 0;
+            timeS.innerHTML = time + ' 秒';
+            scoreS.innerHTML = score + ' 分';
+            homepage.classList.add('none');
+            play_game.classList.remove('none');
+            continue_btn.classList.add('none');
+            boxAll.innerHTML = '';
+            level = 2;
+            countdown();
+            game();
+        });
+
+        start_btn1.addEventListener('click', function () {
+
+            time = yourtime;
+            score = 0;
+            timeS.innerHTML = time + ' 秒';
+            scoreS.innerHTML = score + ' 分';
+            continue_btn.classList.add('none');
+            boxAll.innerHTML = '';
+            level = 2;
+            countdown();
+            game();
+        });
+
+        pause_btn.addEventListener('click', function () {
+            clearInterval(timeID);
+            homepage.classList.remove('none');
+            play_game.classList.add('none');
+            continue_btn.classList.remove('none');
+        });
+
+        continue_btn.addEventListener('click', function () {
+            homepage.classList.add('none');
+            play_game.classList.remove('none');
+            continue_btn.classList.add('none');
+            timeID = setInterval(function(){
+                countdown();
+            },0)
+        });
+
+
+        function countdown() {
+            clearInterval(timeID); //清除計數器
+            timeID = setInterval(function () {
+                if (time == 0) {
+                    clearInterval(timeID);
+                    if (score < 10){
+                        boxAll.innerHTML = '你得到'+score +'分!'+'再多試幾次吧!' ;
+                    }else if (score >30){
+                        boxAll.innerHTML = '你竟然得到'+score +'分! 太厲害了吧!';
+                    }else{
+                        boxAll.innerHTML = '你得到'+score +'分! 來挑戰30分吧! ';
+                    }
+                    
+                    // alert('時間到!');
+
+                }
+
+                else {
+                    time--;
+                    timeS.innerHTML = time + ' 秒';
+                }
+            }, 1000);
+        }
+
+    </script>
+</body>
+
+</html>
