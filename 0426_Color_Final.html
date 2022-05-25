@@ -34,10 +34,10 @@
         }
 
         .boxes {
-            width: 500px;
-            height: 500px;
+            width: 450px;
+            height: 450px;
             position: absolute;
-            top: 32%;
+            top: 35%;
             left: 50%;
             transform: translate(-50%, 0);
 
@@ -48,10 +48,16 @@
             justify-content: center;
             flex-wrap: wrap;
             font-size: 30px;
-            line-height: 500px;
+            line-height: 50px;
             text-align: center;
             color: #552626;
             font-weight: bolder;
+        }
+
+        .boxes p{
+            position: relative;
+            top: 33%;
+            /* transform: translate(0,-50%); */
         }
 
 
@@ -185,7 +191,7 @@
             .boxes {
             width: 400px;
             height: 400px;
-            top: 35%;
+            
             line-height: 400px;
         }
 
@@ -208,6 +214,7 @@
             transform: translate(-35%,0);
             font-size: 20px;
         }
+        
 
         }
 
@@ -215,10 +222,10 @@
             .boxes {
             width: 300px;
             height: 300px;
-            top: 50%;
             line-height: 300px;
             font-size: 15px;
         }
+
 
         h1 {
             font-size: 38px;
@@ -310,7 +317,7 @@
 
                 count++; //按對了答案加一
 
-                if (count == level) {
+                if (count == level*2) {
                     level++;
                     count = 0;
                 }
@@ -385,11 +392,11 @@
                 if (time == 0) {
                     clearInterval(timeID);
                     if (score < 10){
-                        boxAll.innerHTML = '你得到'+score +'分!' +'再多試幾次吧!' ;
+                        boxAll.innerHTML = `<p>你得到 ${score} 分!<br>再多試幾次吧!</p>` ;
                     }else if (score >30){
-                        boxAll.innerHTML = '你竟然得到'+score +'分! 太厲害了吧!';
+                        boxAll.innerHTML = `<p>你竟然得到 ${score} 分!<br>太厲害了吧!</p>`;
                     }else{
-                        boxAll.innerHTML = '你得到'+score +'分! 來挑戰30分吧! ';
+                        boxAll.innerHTML = `<p>你得到${score} 分!<br> 來挑戰30分吧!</p>`;
                     }
                     
                     // alert('時間到!');
