@@ -399,7 +399,7 @@
                     clearInterval(timeID);
                     if (score < 10){
                         boxAll.innerHTML = `<p>你得到 ${score} 分!<br>再多試幾次吧!</p>` ;
-                    }else if (score >30){
+                    }else if (score >= 30){
                         boxAll.innerHTML = `<p>你竟然得到 ${score} 分!<br>太厲害了吧!</p>`;
                     }else{
                         boxAll.innerHTML = `<p>你得到${score} 分!<br> 來挑戰30分吧!</p>`;
