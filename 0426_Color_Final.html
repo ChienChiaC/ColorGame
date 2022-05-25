@@ -5,10 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Color Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
+            font-family: 'Noto Sans TC', sans-serif;
         }
 
         body {
@@ -39,7 +41,7 @@
             left: 50%;
             transform: translate(-50%, 0);
 
-            padding: 10px;
+            padding: 5px;
             background-color: white;
             border-radius: 20px;
             display: flex;
@@ -52,6 +54,7 @@
             font-weight: bolder;
         }
 
+
         .box {
             width: 50%;
             height: 50%;
@@ -59,6 +62,9 @@
             border: 5px white solid;
             border-radius: 20px;
         }
+
+
+       
 
         .answer-box {
             opacity: 0.8;
@@ -82,9 +88,8 @@
         .start {
             width: 280px;
             height: 40px;
-            background-color: #ebcaca;
+            background-color: #dbd1c8;
             font-size: 22px;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
             text-align: center;
             line-height: 40px;
             color: #ac3030;
@@ -92,7 +97,7 @@
         }
 
         h1 {
-            color: #000000;
+            color: #413428;
             font-size: 40px;
             margin-bottom: 10px;
             margin-top: 0px;
@@ -125,7 +130,7 @@
             width: 140px;
             margin-top: 25px;
             font-size: 22px;
-            line-height: 40px;
+            line-height: 25px;
             border-radius: 25px;
             background-color: rgb(255, 187, 0);
             border: 3px solid rgb(14, 14, 14);
@@ -139,9 +144,9 @@
             width: 100px;
             margin-top: 25px;
             font-size: 22px;
-            line-height: 40px;
+            line-height: 35px;
             border-radius: 25px;
-            background-color: rgb(58, 58, 58);
+            background-color: rgb(104, 94, 94);
             border: 3px solid rgb(14, 14, 14);
             font-weight: bolder;
             color: rgb(202, 202, 202);
@@ -175,6 +180,62 @@
         .none {
             display: none;
         }
+
+        @media screen and (max-width: 700px) {
+            .boxes {
+            width: 400px;
+            height: 400px;
+            top: 35%;
+            line-height: 400px;
+        }
+
+        .time-area {
+            width: 150px;
+            position:absolute;
+            top: 240px;
+            left: 50%;
+            transform: translate(-35%,0);
+            font-size: 20px;
+            
+        }
+
+        .score-area {
+            width: 150px;
+            position: absolute;
+            top: 270px;
+            left: 10px;
+            left: 50%;
+            transform: translate(-35%,0);
+            font-size: 20px;
+        }
+
+        }
+
+        @media screen and (max-width: 450px) {
+            .boxes {
+            width: 300px;
+            height: 300px;
+            top: 50%;
+            line-height: 300px;
+        }
+
+        h1 {
+            font-size: 38px;
+        }
+
+        .start {
+            width: 280px;
+            height: 40px;
+            background-color: #dbd1c8;
+            font-size: 20px;
+            text-align: center;
+            line-height: 40px;
+            color: #ac3030;
+            font-weight: bolder;
+        }
+
+        }
+
     </style>
 </head>
 
@@ -193,10 +254,10 @@
             <h1>顏色辨識大挑戰</h1>
             <div class="start"><span><b>找出<span>"顏色不同"</span>的色塊吧!</b></span></div>
             <span class="time-area">
-                時間: <span class="time"></span>
+                時間 : <span class="time"></span>
             </span>
             <span class="score-area">
-                分數: <span class="score"></span>
+                分數 : <span class="score"></span>
             </span>
             <div class="btnList"><button class="start-btn1">重新開始</button>
                 <button class="pause-btn greyBtn">暫停</button>
@@ -323,7 +384,7 @@
                 if (time == 0) {
                     clearInterval(timeID);
                     if (score < 10){
-                        boxAll.innerHTML = '你得到'+score +'分!'+'再多試幾次吧!' ;
+                        boxAll.innerHTML = '你得到'+score +'分!' +'再多試幾次吧!' ;
                     }else if (score >30){
                         boxAll.innerHTML = '你竟然得到'+score +'分! 太厲害了吧!';
                     }else{
